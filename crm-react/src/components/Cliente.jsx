@@ -3,7 +3,7 @@
 
 function Cliente({cliente}) {
 
-  const {nombre, empresa, email, telefono, id} = cliente
+  const {nombre, empresa, email, telefono} = cliente
 
   return (
     <tr className="border-b space-y-2">
