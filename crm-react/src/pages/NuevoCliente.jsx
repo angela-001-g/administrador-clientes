@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-control-regex */
 /* eslint-disable react-refresh/only-export-components */
 import { useNavigate, Form, useActionData } from "react-router-dom"
 import Formulario from "../components/Formulario";
@@ -7,12 +9,21 @@ export async function action({request}) {
   const formData = await request.formData()
 
   const datos = Object.fromEntries(formData)
+
+  const email = formData.get('email')
+
+
 //  Validación 
 const errores = [];
 if(Object.values(datos).includes('')){
   errores.push('Todos los campos son obligatorios')
 }
 
+let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+if(!regex.test(email)){
+  errores.push('Email no válido')
+}
 // Retornar datos si hay errores 
 if(Object.keys(errores).length){
   return errores
@@ -26,7 +37,6 @@ function NuevoCliente() {
   const errores = useActionData();
   const navigate = useNavigate();
 
-  console.log(errores)
   return (
     <>
       <h1 className="font-black text-4xl text-blue-900">Nuevo cliente</h1>
@@ -47,6 +57,7 @@ function NuevoCliente() {
 
             <Form
               method="post"
+              noValidate
             >
               <Formulario />
               <input 
