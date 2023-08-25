@@ -15,7 +15,7 @@ if(Object.values(datos).includes('')){
 
 // Retornar datos si hay errores 
 if(Object.keys(errores).length){
-  console.log('Si hay errores')
+  return errores
 }
 
   return ''
@@ -43,7 +43,7 @@ function NuevoCliente() {
 
       <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10 mt-20">
 
-            {errores?.length && errores.map((error, i) => <Error key={i}>{error}<Error/> )}
+            {errores?.length && errores.map( (error, i) => <Error key={i}>{error}</Error> )}
 
             <Form
               method="post"
