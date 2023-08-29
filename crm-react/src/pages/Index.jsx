@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useLoaderData } from "react-router-dom";
 import Cliente from "../components/Cliente";
+import { obtenerClientes } from "../data/Clientes"
 
 export function loader() {
-  console.log(import.meta.env)
+  const clientes = obtenerClientes()
   
-  return ''      
+  return clientes  
 }
 
 function index() {
