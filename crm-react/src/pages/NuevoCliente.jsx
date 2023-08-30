@@ -1,9 +1,10 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-control-regex */
 /* eslint-disable react-refresh/only-export-components */
-import { useNavigate, Form, useActionData } from "react-router-dom"
+import { useNavigate, Form, useActionData, redirect } from "react-router-dom"
 import Formulario from "../components/Formulario";
 import Error from "../components/Error";
+import { agregarCliente } from "../data/clientes"
 
 export async function action({request}) {
   const formData = await request.formData()
@@ -21,15 +22,17 @@ if(Object.values(datos).includes('')){
 
 let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
 
-if(!regex.test(email)){
-  errores.push('Email no válido')
-}
-// Retornar datos si hay errores 
-if(Object.keys(errores).length){
-  return errores
-}
+  if(!regex.test(email)){
+    errores.push('Email no válido')
+  }
+  // Retornar datos si hay errores 
+  if(Object.keys(errores).length){
+    return errores
+  }
 
-  return ''
+  await agregarCliente(datos)
+
+  return redirect('/')
 }
 
 function NuevoCliente() {
