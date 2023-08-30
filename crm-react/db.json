@@ -1,11 +1,12 @@
 {
   "clientes": [
     {
-      "id": 1,
-      "nombre": "Camilo",
-      "telefono": 102013313,
+      "nombre": "Camilo (actualizado)",
+      "empresa": "Codigo Con Juan",
       "email": "camilo@camilo.com",
-      "empresa": "Codigo Con Juan"
+      "telefono": "102013313",
+      "notas": "Nueva Nota",
+      "id": 1
     },
     {
       "id": 2,
